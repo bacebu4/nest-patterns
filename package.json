@@ -1,0 +1,38 @@
+{
+  "name": "sports-wallet",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf build && tsc --build .",
+    "dev": "nodemon --watch ./src --ext ts --exec 'tsc --build . && node --import=specifier-resolution-node/register ./build/main.js'",
+    "eslint": "",
+    "eslint:new": "eslint",
+    "test": "",
+    "test:unit:ci": "./scripts/test-unit-ci.sh",
+    "test:unit:local": "./scripts/test-unit-local.sh",
+    "test:e2e:ci": "./scripts/test-e2e-ci.sh",
+    "test:e2e:local": "./scripts/test-e2e-local.sh",
+    "generate:proto": "proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=./src/auth/api ./src/auth/api/*.proto"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "@types/node": "20.14.10",
+    "globals": "^16.0.0",
+    "nodemon": "3.0.1",
+    "typescript": "5.7.3"
+  },
+  "dependencies": {
+    "@nestjs/common": "10.4.17",
+    "@nestjs/core": "10.4.17",
+    "@nestjs/platform-fastify": "10.4.17",
+    "class-transformer": "0.5.1",
+    "class-validator": "0.14.0",
+    "fastify": "4.29.1",
+    "reflect-metadata": "0.1.13",
+    "resolve": "1.22.1",
+    "rxjs": "7.8.1",
+    "specifier-resolution-node": "1.1.4"
+  }
+}
