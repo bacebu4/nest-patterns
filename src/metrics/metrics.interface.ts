@@ -1,8 +1,3 @@
-export interface FinishMonitoring {
-  finishWithError(): void;
-  finish(): void;
-}
-
 export interface IMetricsMeta {
   name?: string;
 }
@@ -12,5 +7,8 @@ export interface IMetricsOptions {
 }
 
 export interface IMetricsService {
-  startMonitoring(name: string): FinishMonitoring;
+  startMonitoring(name: string): {
+    finishWithError(): void;
+    finish(): void;
+  };
 }

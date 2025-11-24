@@ -1,7 +1,7 @@
-import { FinishMonitoring, IMetricsService } from './metrics.interface';
+import { IMetricsService } from './metrics.interface';
 
 export class DisabledService implements IMetricsService {
-  startMonitoring(): FinishMonitoring {
+  startMonitoring() {
     return {
       finish() {},
       finishWithError() {},

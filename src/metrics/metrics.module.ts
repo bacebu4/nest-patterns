@@ -1,17 +1,17 @@
-import { DynamicModule, FactoryProvider, Global, Module } from '@nestjs/common';
+import { DynamicModule, FactoryProvider, Module } from '@nestjs/common';
 import { DisabledService } from './disabled.service';
 import { METRICS, METRICS_OPTIONS } from './metrics.constants';
 import { IMetricsOptions } from './metrics.interface';
-import { MetricsWrapper } from './metrics.wrapper';
+import { MetricsExplorer } from './metrics.explorer';
 import { DiscoveryModule } from '@nestjs/core';
 import { LocalService } from './local.service';
 
 @Module({
   imports: [DiscoveryModule],
-  providers: [MetricsWrapper],
+  providers: [MetricsExplorer],
 })
 export class MetricsModule {
-  static forRoot(
+  static forRootAsync(
     options: Omit<FactoryProvider<Promise<IMetricsOptions> | IMetricsOptions>, 'provide'>,
   ): DynamicModule {
     return {

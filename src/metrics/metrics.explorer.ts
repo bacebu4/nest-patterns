@@ -5,8 +5,8 @@ import { DiscoveryService, MetadataScanner, Reflector } from '@nestjs/core';
 import { InstanceWrapper } from '@nestjs/core/injector/instance-wrapper';
 
 @Injectable()
-export class MetricsWrapper implements OnModuleInit {
-  private logger = new Logger(MetricsWrapper.name);
+export class MetricsExplorer implements OnModuleInit {
+  private logger = new Logger(MetricsExplorer.name);
 
   constructor(
     private discoveryService: DiscoveryService,
@@ -24,19 +24,21 @@ export class MetricsWrapper implements OnModuleInit {
       ...this.discoveryService.getControllers(),
       ...this.discoveryService.getProviders(),
     ];
+
     instanceWrappers.forEach((wrapper: InstanceWrapper) => {
       const { instance } = wrapper;
+
       if (!instance || !Object.getPrototypeOf(instance)) {
         return;
       }
-      this.metadataScanner.scanFromPrototype(
-        instance,
-        Object.getPrototypeOf(instance),
-        (key: string) =>
+
+      this.metadataScanner
+        .getAllMethodNames(Object.getPrototypeOf(instance))
+        .forEach(name =>
           wrapper.isDependencyTreeStatic()
-            ? this.lookup(instance, key)
-            : this.warnForNonStaticProviders(wrapper, key),
-      );
+            ? this.lookup(instance, name)
+            : this.warnForNonStaticProviders(wrapper, name),
+        );
     });
   }
 
@@ -47,7 +49,7 @@ export class MetricsWrapper implements OnModuleInit {
       return;
     }
 
-    const metricName = this.reflector.get<IMetricsMeta>(METRICS_META, methodRef);
+    const metricName = this.getMetadata<IMetricsMeta>(METRICS_META, methodRef);
     if (metricName) {
       const defaultMetricName = `${
         typeof instance['constructor']?.['name'] === 'string'
@@ -56,6 +58,12 @@ export class MetricsWrapper implements OnModuleInit {
       }/${key}`;
       instance[key] = this.wrapFunction(methodRef, instance, metricName.name || defaultMetricName);
     }
+  }
+
+  private getMetadata<T>(key: Symbol, target: Function): T | undefined {
+    const isObject = typeof target === 'object' ? target !== null : typeof target === 'function';
+
+    return isObject ? this.reflector.get(key, target) : undefined;
   }
 
   warnForNonStaticProviders(wrapper: InstanceWrapper<any>, key: string) {

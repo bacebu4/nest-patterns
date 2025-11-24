@@ -9,8 +9,9 @@ import { Strategy2Service } from './strategy-2.service';
 export class Strategy2Module {
   static register<T>(options: IStrategy2Options<T>): DynamicModule {
     return {
-      // TODO just allow to pass imports + providers here?
       module: Strategy2Module,
+      imports: options.imports,
+      global: options.global,
       providers: [
         ...options.strategies.map(s => s),
         {
