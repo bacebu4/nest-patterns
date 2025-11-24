@@ -16,7 +16,7 @@ export class LocalService implements IMetricsService {
       finishWithError: () => {
         const endTime = Date.now();
         const elapsedTime = endTime - startTime;
-        this.logger.log(`Name: ${name}, error occurred, time passed: ${elapsedTime}ms`);
+        this.logger.error(`Name: ${name}, error occurred, time passed: ${elapsedTime}ms`);
       },
     };
   }

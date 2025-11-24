@@ -1,7 +1,25 @@
-import { DynamicModule, ForwardReference, InjectionToken, Provider, Type } from '@nestjs/common';
+import {
+  ClassProvider,
+  DynamicModule,
+  ExistingProvider,
+  FactoryProvider,
+  ForwardReference,
+  InjectionToken,
+  Type,
+  ValueProvider,
+} from '@nestjs/common';
 
 export interface IStrategy2Options<T> {
-  strategies: Provider<T>[];
+  /**
+   * Modified type of Provider<T>
+   */
+  strategies: (
+    | Type<T>
+    | ClassProvider<T>
+    | ValueProvider<T>
+    | FactoryProvider<T>
+    | ExistingProvider<T>
+  )[];
   provide: InjectionToken;
   /**
    * Optional list of imported modules that export the providers which are

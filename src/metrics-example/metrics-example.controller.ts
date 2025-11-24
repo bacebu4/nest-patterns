@@ -10,7 +10,6 @@ export class MetricsExampleController {
     return { example: true };
   }
 
-  @Metrics()
   @Get('/metrics-example-2')
   public async example2() {
     return this.usedByOurCode();

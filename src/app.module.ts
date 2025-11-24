@@ -12,8 +12,8 @@ import { StrategyExample2Module } from './strategy-example-2/strategy-example-2.
       }),
     }),
     MetricsExampleModule,
-    StrategyExampleModule,
-    StrategyExample2Module,
+    // StrategyExampleModule,
+    // StrategyExample2Module,
   ],
 })
 export class AppModule {}
