@@ -8,6 +8,4 @@ export class StrategyService<T = unknown> {
   public getAll() {
     return this.instances;
   }
-
-  // TODO get by name
 }

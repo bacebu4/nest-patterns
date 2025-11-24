@@ -1,7 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { DiscoveryModule } from '@nestjs/core';
 import { IStrategy2Options } from './strategy-2.interface';
-import { Strategy2Service } from './strategy-2.service';
 
 @Module({
   imports: [DiscoveryModule],
@@ -18,7 +17,7 @@ export class Strategy2Module {
           inject: options.strategies.map(s => ('provide' in s ? s.provide : s)),
           provide: options.provide,
           useFactory: (...strategies: T[]) => {
-            return new Strategy2Service<T>(strategies);
+            return strategies;
           },
         },
       ],

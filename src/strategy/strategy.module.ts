@@ -26,7 +26,6 @@ export class StrategyModule {
             strategyService: StrategyService,
             reflector: Reflector,
           ) => {
-            // TODO just inject options
             return new StrategyExplorer(discoveryService, strategyService, reflector, {
               metaKey: options.metaKey,
             });
