@@ -1,22 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
-import { Metrics } from '../metrics/metrics.decorator';
-import { UseMetrics } from '../metrics/use-metrics.decorator';
+import { MetricsExampleService } from './metrics-example.service';
 
 @Controller()
 export class MetricsExampleController {
+  constructor(private readonly service: MetricsExampleService) {}
+
   @Get('/metrics-example')
-  @UseMetrics()
   public async example() {
-    return { example: true };
-  }
-
-  @Get('/metrics-example-2')
-  public async example2() {
-    return this.usedByOurCode();
-  }
-
-  @Metrics()
-  private usedByOurCode() {
-    return { example2: true };
+    return this.service.someMethod();
   }
 }

@@ -1,8 +1,7 @@
 import { Logger } from '@nestjs/common';
-import { IMetricsService } from './metrics.interface';
 
-export class LocalService implements IMetricsService {
-  private logger = new Logger(LocalService.name);
+export class MetricsService {
+  private logger = new Logger(MetricsService.name);
 
   startMonitoring(name: string) {
     const startTime = Date.now();

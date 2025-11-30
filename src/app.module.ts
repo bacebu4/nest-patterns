@@ -6,11 +6,7 @@ import { StrategyExample2Module } from './strategy-example-2/strategy-example-2.
 
 @Module({
   imports: [
-    MetricsModule.forRootAsync({
-      useFactory: () => ({
-        disable: false,
-      }),
-    }),
+    MetricsModule,
     MetricsExampleModule,
     // StrategyExampleModule,
     // StrategyExample2Module,

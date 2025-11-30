@@ -1,8 +1,9 @@
-import { Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
-import { METRICS, METRICS_META } from './metrics.constants';
-import { IMetricsMeta, IMetricsService } from './metrics.interface';
+import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { DiscoveryService, MetadataScanner, Reflector } from '@nestjs/core';
 import { InstanceWrapper } from '@nestjs/core/injector/instance-wrapper';
+import { MetricsService } from './metrics.service';
+import { METRICS_META } from './metrics.constants';
+import { IMetricsMeta } from './metrics.interface';
 
 @Injectable()
 export class MetricsExplorer implements OnModuleInit {
@@ -12,7 +13,7 @@ export class MetricsExplorer implements OnModuleInit {
     private discoveryService: DiscoveryService,
     private metadataScanner: MetadataScanner,
     private reflector: Reflector,
-    @Inject(METRICS) private metricsService: IMetricsService,
+    private metricsService: MetricsService,
   ) {}
 
   onModuleInit() {

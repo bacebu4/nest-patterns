@@ -1,20 +1,18 @@
 import { catchError, Observable, tap, throwError } from 'rxjs';
 
-import { METRICS } from './metrics.constants';
-import { IMetricsService } from './metrics.interface';
 import {
   applyDecorators,
   CallHandler,
   ExecutionContext,
-  Inject,
   Injectable,
   NestInterceptor,
   UseInterceptors,
 } from '@nestjs/common';
+import { MetricsService } from './metrics.service';
 
 @Injectable()
 class UseMetricsInterceptor implements NestInterceptor {
-  constructor(@Inject(METRICS) private metrics: IMetricsService) {}
+  constructor(private metrics: MetricsService) {}
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
     const routerName = context.getClass().name;
