@@ -43,8 +43,8 @@ export class MetricsExplorer implements OnModuleInit {
     });
   }
 
-  lookup(instance: Record<string, Function>, key: string) {
-    const methodRef = instance[key];
+  lookup(instance: Record<string, Function>, name: string) {
+    const methodRef = instance[name];
 
     if (!methodRef) {
       return;
@@ -56,8 +56,8 @@ export class MetricsExplorer implements OnModuleInit {
         typeof instance['constructor']?.['name'] === 'string'
           ? instance['constructor']?.['name']
           : 'unknown'
-      }/${key}`;
-      instance[key] = this.wrapFunction(methodRef, instance, metricName.name || defaultMetricName);
+      }/${name}`;
+      instance[name] = this.wrapFunction(methodRef, instance, metricName.name || defaultMetricName);
     }
   }
 

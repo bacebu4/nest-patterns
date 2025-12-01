@@ -6,7 +6,7 @@ export class StrategyExplorer implements OnModuleInit {
   public constructor(
     private readonly discoveryService: DiscoveryService,
     private readonly strategyService: StrategyService,
-    private reflector: Reflector,
+    private readonly reflector: Reflector,
     private readonly config: { metaKey: Symbol },
   ) {}
 
