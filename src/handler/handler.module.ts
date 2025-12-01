@@ -1,32 +1,32 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { StrategyExplorer } from './strategy.explorer';
-import { IStrategyOptions } from './strategy.interface';
-import { StrategyService } from './strategy.service';
+import { HandlerExplorer } from './handler.explorer';
+import { IHandlerOptions } from './handler.interface';
+import { HandlerService } from './handler.service';
 import { DiscoveryModule, DiscoveryService, Reflector } from '@nestjs/core';
 
 @Module({
   imports: [DiscoveryModule],
 })
-export class StrategyModule {
-  static register(options: IStrategyOptions): DynamicModule {
+export class HandlerModule {
+  static register(options: IHandlerOptions): DynamicModule {
     return {
-      module: StrategyModule,
+      module: HandlerModule,
       providers: [
         {
           provide: options.provide,
           useFactory: () => {
-            return new StrategyService();
+            return new HandlerService();
           },
         },
         {
-          provide: StrategyExplorer,
+          provide: HandlerExplorer,
           inject: [DiscoveryService, options.provide, Reflector],
           useFactory: (
             discoveryService: DiscoveryService,
-            strategyService: StrategyService,
+            handlerService: HandlerService,
             reflector: Reflector,
           ) => {
-            return new StrategyExplorer(discoveryService, strategyService, reflector, {
+            return new HandlerExplorer(discoveryService, handlerService, reflector, {
               metaKey: options.metaKey,
             });
           },

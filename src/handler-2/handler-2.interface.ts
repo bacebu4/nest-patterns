@@ -9,11 +9,11 @@ import {
   ValueProvider,
 } from '@nestjs/common';
 
-export interface IStrategy2Options<T> {
+export interface IHandler2Options<T> {
   /**
    * Modified type of Provider<T>
    */
-  strategies: (
+  handlers: (
     | Type<T>
     | ClassProvider<T>
     | ValueProvider<T>

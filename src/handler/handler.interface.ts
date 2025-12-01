@@ -1,6 +1,6 @@
 import { InjectionToken } from '@nestjs/common';
 
-export interface IStrategyOptions {
+export interface IHandlerOptions {
   metaKey: Symbol;
   provide: InjectionToken;
 }

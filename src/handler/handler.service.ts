@@ -1,4 +1,4 @@
-export class StrategyService<T = unknown> {
+export class HandlerService<T = unknown> {
   private readonly instances: T[] = [];
 
   public add(instance: T) {

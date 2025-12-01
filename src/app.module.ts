@@ -1,15 +1,15 @@
 import { Module } from '@nestjs/common';
 import { MetricsExampleModule } from './metrics-example/metrics-example.module';
 import { MetricsModule } from './metrics/metrics.module';
-import { StrategyExampleModule } from './strategy-example/strategy-example.module';
-import { StrategyExample2Module } from './strategy-example-2/strategy-example-2.module';
+import { HandlerExampleModule } from './handler-example/handler-example.module';
+import { HandlerExample2Module } from './handler-example-2/handler-example-2.module';
 
 @Module({
   imports: [
     MetricsModule,
     MetricsExampleModule,
-    // StrategyExampleModule,
-    // StrategyExample2Module,
+    // HandlerExampleModule,
+    HandlerExample2Module,
   ],
 })
 export class AppModule {}

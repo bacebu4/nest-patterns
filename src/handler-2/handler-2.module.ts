@@ -1,20 +1,20 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { DiscoveryModule } from '@nestjs/core';
-import { IStrategy2Options } from './strategy-2.interface';
+import { IHandler2Options } from './handler-2.interface';
 
 @Module({
   imports: [DiscoveryModule],
 })
-export class Strategy2Module {
-  static register<T>(options: IStrategy2Options<T>): DynamicModule {
+export class Handler2Module {
+  static register<T>(options: IHandler2Options<T>): DynamicModule {
     return {
-      module: Strategy2Module,
+      module: Handler2Module,
       imports: options.imports,
       global: options.global,
       providers: [
-        ...options.strategies.map(s => s),
+        ...options.handlers.map(s => s),
         {
-          inject: options.strategies.map(s => ('provide' in s ? s.provide : s)),
+          inject: options.handlers.map(s => ('provide' in s ? s.provide : s)),
           provide: options.provide,
           useFactory: (...strategies: T[]) => {
             return strategies;

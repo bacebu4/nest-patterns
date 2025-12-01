@@ -1,11 +1,11 @@
 import { OnModuleInit } from '@nestjs/common';
-import { StrategyService } from './strategy.service';
+import { HandlerService } from './handler.service';
 import { DiscoveryService, Reflector } from '@nestjs/core';
 
-export class StrategyExplorer implements OnModuleInit {
+export class HandlerExplorer implements OnModuleInit {
   public constructor(
     private readonly discoveryService: DiscoveryService,
-    private readonly strategyService: StrategyService,
+    private readonly handlerService: HandlerService,
     private readonly reflector: Reflector,
     private readonly config: { metaKey: Symbol },
   ) {}
@@ -22,6 +22,6 @@ export class StrategyExplorer implements OnModuleInit {
           wrapper.instance && this.reflector.get(this.config.metaKey, wrapper.instance.constructor),
       );
 
-    wrappers.forEach(w => this.strategyService.add(w.instance));
+    wrappers.forEach(w => this.handlerService.add(w.instance));
   }
 }
