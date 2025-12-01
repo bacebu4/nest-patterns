@@ -9,7 +9,7 @@ import { HandlerExample2Module } from './handler-example-2/handler-example-2.mod
     MetricsModule,
     MetricsExampleModule,
     // HandlerExampleModule,
-    HandlerExample2Module,
+    // HandlerExample2Module,
   ],
 })
 export class AppModule {}

@@ -19,7 +19,9 @@ export class HandlerExplorer implements OnModuleInit {
       .getProviders()
       .filter(
         wrapper =>
-          wrapper.instance && this.reflector.get(this.config.metaKey, wrapper.instance.constructor),
+          wrapper.isDependencyTreeStatic() &&
+          wrapper.instance &&
+          this.reflector.get(this.config.metaKey, wrapper.instance.constructor),
       );
 
     wrappers.forEach(w => this.handlerService.add(w.instance));
